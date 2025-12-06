@@ -12,7 +12,19 @@ pipeline{
                 git branch: 'main', url: 'https://github.com/akshaybombale/Netflix_Clone.git'
             }
         }
-          
-        }
+
+          stage('Build Docker file') {
+            steps {
+               
+                       sh """
+                              docker build \
+                              --build-arg TMDB_V3_API_KEY=${TMDB_V3_API_KEY} \
+                               -t netflix_clone .
+                               """
+                  }
     }
+
+    }
+}
+          
    
