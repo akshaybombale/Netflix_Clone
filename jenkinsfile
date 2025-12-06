@@ -1,9 +1,9 @@
 pipeline{
     agent any
 
-     environment {
+  /*    environment {
         TMDB_V3_API_KEY = credentials('TMDB_V3_API_KEY')
-    }
+    } */
     stages{
         stage('Clean Workspace') {
             steps {
@@ -19,6 +19,7 @@ pipeline{
 
           stage('Build Docker file') {
             steps {
+                withCredentials([string(credentialsId: 'TMDB_V3_API_KEY', variable: 'TMDB_V3_API_KEY')])
                
                        sh """
                               docker build \
